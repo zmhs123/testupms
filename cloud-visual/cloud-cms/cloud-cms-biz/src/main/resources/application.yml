@@ -1,0 +1,21 @@
+server:
+  port: 5000
+
+spring:
+  application:
+    name: @artifactId@
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${NACOS_HOST:cloud-register}:${NACOS_PORT:8848}
+        namespace: radartest
+      config:
+        server-addr: ${spring.cloud.nacos.discovery.server-addr}
+        namespace: radartest
+  config:
+    import:
+      - optional:nacos:application-@profiles.active@.yml
+      - optional:nacos:${spring.application.name}-@profiles.active@.yml
+
+
+

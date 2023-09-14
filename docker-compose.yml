@@ -1,0 +1,148 @@
+# 使用说明 V4.4.0
+# 1. 使用docker-compose  宿主机不需要配置host来发现
+# 2. 无需修改源码，根目录  docker-compose up 即可
+# 3. 静静等待服务启动
+
+version: '3'
+services:
+  cloud-mysql:
+    build:
+      context: ./db
+    environment:
+      MYSQL_ROOT_HOST: "%"
+      MYSQL_ROOT_PASSWORD: root
+    restart: always
+    container_name: cloud-mysql
+    image: cloud-mysql
+    ports:
+      - 3306:3306
+    volumes:
+      - ./cloud-mysql:/var/lib/mysql
+    command: --lower_case_table_names=1
+
+  cloud-redis:
+    container_name: cloud-redis
+    image: redis:6.2.6
+    restart: always
+    ports:
+      - 6379:6379
+
+  cloud-register:
+    build:
+      context: ./cloud-register
+    restart: always
+    container_name: cloud-register
+    image: cloud-register
+    ports:
+      - 8848:8848
+
+  cloud-gateway:
+    build:
+      context: ./cloud-gateway
+    restart: always
+    container_name: cloud-gateway
+    image: cloud-gateway
+    ports:
+      - 9999:9999
+
+  cloud-auth:
+    build:
+      context: ./cloud-auth
+    restart: always
+    container_name: cloud-auth
+    image: cloud-auth
+
+  cloud-upms:
+    build:
+      context: ./cloud-upms/cloud-upms-biz
+    restart: always
+    container_name: cloud-upms
+    image: cloud-upms
+
+  cloud-monitor:
+    build:
+      context: ./cloud-visual/cloud-monitor
+    restart: always
+    image: cloud-monitor
+    container_name: cloud-monitor
+    ports:
+      - 5001:5001
+
+  cloud-daemon-quartz:
+    build:
+      context: ./cloud-visual/cloud-daemon-quartz
+    restart: always
+    image: cloud-daemon-quartz
+    container_name: cloud-daemon-quartz
+
+  cloud-daemon-elastic-job:
+    build:
+      context: ./cloud-visual/cloud-daemon-elastic-job
+    restart: always
+    image: cloud-daemon-elastic-job
+    container_name: cloud-daemon-elastic-job
+
+  cloud-codegen:
+    build:
+      context: ./cloud-visual/cloud-codegen
+    restart: always
+    image: cloud-codegen
+    container_name: cloud-codegen
+
+  cloud-mp-platform:
+    build:
+      context: ./cloud-visual/cloud-mp-platform
+    restart: always
+    image: cloud-mp-platform
+    container_name: cloud-mp-platform
+
+  cloud-pay-platform:
+    build:
+      context: ./cloud-visual/cloud-pay-platform
+    restart: always
+    image: cloud-pay-platform
+    container_name: cloud-pay-platform
+
+  cloud-oa-platform:
+    build:
+      context: ./cloud-visual/cloud-oa-platform
+    restart: always
+    image: cloud-oa-platform
+    container_name: cloud-oa-platform
+
+  cloud-report-platform:
+    build:
+      context: ./cloud-visual/cloud-report-platform
+    restart: always
+    image: cloud-report-platform
+    container_name: cloud-report-platform
+    ports:
+      - 9095:9095
+
+  cloud-jimu-platform:
+    build:
+      context: ./cloud-visual/cloud-jimu-platform
+    restart: always
+    image: cloud-jimu-platform
+    container_name: cloud-jimu-platform
+    ports:
+      - 5008:5008
+
+  cloudx-job:
+    build:
+      context: ./cloud-visual/cloud-xxl-job-admin
+    restart: always
+    container_name: cloud-job
+    hostname: cloud-job
+    image: cloud-job
+    ports:
+      - 9080:9080
+
+  cloud-sentinel:
+    build:
+      context: ./cloud-visual/cloud-sentinel-dashboard
+    restart: always
+    image: cloud-sentinel
+    container_name: cloud-sentinel
+    ports:
+      - 5020:5020

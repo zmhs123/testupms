@@ -1,0 +1,13 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  cn.tech.wings.cloud.common.security.component.CloudTokenEnhancer,\
+  cn.tech.wings.cloud.common.security.component.CloudSecurityInnerAspect,\
+  cn.tech.wings.cloud.common.security.service.CloudDefaultUserDetailsServiceImpl,\
+  cn.tech.wings.cloud.common.security.service.CloudAppUserDetailsServiceImpl,\
+  cn.tech.wings.cloud.common.security.service.CloudClientDetailsServiceImpl,\
+  cn.tech.wings.cloud.common.security.component.CloudSecurityCommonAutoConfiguration,\
+  cn.tech.wings.cloud.common.security.component.CloudSecurityMessageSourceConfiguration,\
+  cn.tech.wings.cloud.common.security.component.CloudTokenStoreCleanSchedule,\
+  cn.tech.wings.cloud.common.security.listener.AuthenticationFailureEventListener,\
+  cn.tech.wings.cloud.common.security.listener.AuthenticationSuccessEventListener,\
+  cn.tech.wings.cloud.common.security.listener.AuthenticationLogoutSuccessEventListener
+

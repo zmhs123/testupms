@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.tech.wings.cloud.admin.mapper.SysProductLineMapper">
+
+	<resultMap id="sysProductLineMap" type="cn.tech.wings.cloud.admin.api.entity.SysProductLine">
+		<id property="id" column="id"/>
+		<result property="name" column="name"/>
+		<result property="sortOrder" column="sort_order"/>
+		<result property="productType" column="product_type"/>
+		<result property="createBy" column="create_by"/>
+		<result property="updateBy" column="update_by"/>
+		<result property="createTime" column="create_time"/>
+		<result property="updateTime" column="update_time"/>
+		<result property="delFlag" column="del_flag"/>
+		<result property="parentId" column="parent_id"/>
+		<result property="deptId" column="dept_id"/>
+	</resultMap>
+
+	<resultMap id="sysProductLineResultMap" type="cn.tech.wings.cloud.admin.api.vo.result.SysProductLineResult">
+		<id property="id" column="id"/>
+		<result property="name" column="name"/>
+		<result property="sortOrder" column="sort_order"/>
+		<result property="productType" column="product_type"/>
+		<result property="createBy" column="create_by"/>
+		<result property="updateBy" column="update_by"/>
+		<result property="createTime" column="create_time"/>
+		<result property="updateTime" column="update_time"/>
+		<result property="delFlag" column="del_flag"/>
+		<result property="parentId" column="parent_id"/>
+		<result property="deptId" column="dept_id"/>
+		<result property="deptName" column="dept_name"/>
+	</resultMap>
+
+	<select id="getProductLinePage" resultMap="sysProductLineResultMap">
+		SELECT
+		a.id,
+		a.name,
+		a.sort_order,
+		a.product_type,
+		a.create_by,
+		a.update_by,
+		a.create_time,
+		a.update_time,
+		a.del_flag,
+		a.parent_id,
+		a.dept_id,
+		d.name dept_name
+		FROM
+		sys_product_line a
+		LEFT JOIN sys_dept d ON d.dept_id = a.dept_id
+		<where>
+			a.del_flag = '0'
+			<if test="query.name != null and query.name != ''">
+				<bind name="nameLike" value="'%'+query.name+'%'"/>
+				AND a.name LIKE #{nameLike}
+			</if>
+			<if test="query.deptId != null">
+				AND a.dept_id = #{query.deptId}
+			</if>
+			<if test="query.productType != null">
+				AND a.product_type = #{query.productType}
+			</if>
+			<if test="query.parentId != null">
+				AND a.parent_id = #{query.parentId}
+			</if>
+		</where>
+
+		<if test="_databaseId != 'mssql'">
+			ORDER BY a.create_time DESC
+		</if>
+	</select>
+</mapper>

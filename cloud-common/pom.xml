@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~
+  ~      Copyright (c) 2018-2025, cloud All rights reserved.
+  ~
+  ~  Redistribution and use in source and binary forms, with or without
+  ~  modification, are permitted provided that the following conditions are met:
+  ~
+  ~ Redistributions of source code must retain the above copyright notice,
+  ~  this list of conditions and the following disclaimer.
+  ~  Redistributions in binary form must reproduce the above copyright
+  ~  notice, this list of conditions and the following disclaimer in the
+  ~  documentation and/or other materials provided with the distribution.
+  ~  Neither the name of the pig4cloud.com developer nor the names of its
+  ~  contributors may be used to endorse or promote products derived from
+  ~  this software without specific prior written permission.
+  ~  Author: cloud
+  ~
+  -->
+
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>cn.tech.wings</groupId>
+		<artifactId>cloud</artifactId>
+		<version>4.0</version>
+	</parent>
+
+	<artifactId>cloud-common</artifactId>
+	<packaging>pom</packaging>
+
+	<description>cloud 公共聚合模块</description>
+
+	<modules>
+		<module>cloud-common-bom</module>
+		<module>cloud-common-core</module>
+		<module>cloud-common-data</module>
+		<module>cloud-common-datasource</module>
+		<module>cloud-common-excel</module>
+		<module>cloud-common-feign</module>
+		<module>cloud-common-gateway</module>
+		<module>cloud-common-gray</module>
+		<module>cloud-common-idempotent</module>
+		<module>cloud-common-job</module>
+		<module>cloud-common-log</module>
+		<module>cloud-common-oss</module>
+		<module>cloud-common-seata</module>
+		<module>cloud-common-social</module>
+		<module>cloud-common-security</module>
+		<module>cloud-common-sentinel</module>
+		<module>cloud-common-sequence</module>
+		<module>cloud-common-swagger</module>
+		<module>cloud-common-test</module>
+		<module>cloud-common-websocket</module>
+		<module>cloud-common-xss</module>
+	</modules>
+</project>

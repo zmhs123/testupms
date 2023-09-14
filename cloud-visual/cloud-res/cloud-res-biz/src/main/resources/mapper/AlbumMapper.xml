@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tech.wings.cloud.res.mapper.AlbumMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.tech.wings.cloud.res.api.entity.Album">
+        <id column="id" property="id" />
+        <result column="add_time" property="addTime" />
+        <result column="delete_status" property="deleteStatus" />
+        <result column="album_info" property="albumInfo" />
+        <result column="album_default" property="albumDefault" />
+        <result column="album_name" property="albumName" />
+        <result column="album_sequence" property="albumSequence" />
+        <result column="album_cover_url" property="albumCoverUrl" />
+        <result column="album_code" property="albumCode" />
+        <result column="file_count" property="fileCount" />
+        <result column="parentid" property="parentid" />
+        <result column="treeid" property="treeid" />
+        <result column="res_type" property="resType" />
+        <result column="owner_id" property="ownerId" />
+        <result column="total_size" property="totalSize" />
+        <result column="use_size" property="useSize" />
+        <result column="isleaf" property="isleaf" />
+		<result column="tc_code" property="tcCode" />
+		<result column="public_status" property="publicStatus" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id AS "id", add_time AS "addTime", delete_status AS "deleteStatus", album_info AS "albumInfo", album_default AS "albumDefault", album_name AS "albumName", album_sequence AS "albumSequence", album_cover_url AS "albumCoverUrl", album_code AS "albumCode", file_count AS "fileCount", parentid AS "parentid", treeid AS "treeid", res_type AS "resType", owner_id AS "ownerId", total_size AS "totalSize", use_size AS "useSize", isleaf AS "isleaf",tc_code AS "tcCode",public_status AS "publicStatus"
+    </sql>
+
+
+    <select id="customList" resultType="cn.tech.wings.cloud.res.api.model.result.AlbumResult" parameterType="cn.tech.wings.cloud.res.api.model.params.AlbumParam">
+        select
+        <include refid="Base_Column_List"/>
+        from res_album where delete_status = 0
+		<if test="paramCondition.tcCode != null and paramCondition.tcCode != ''">
+			and tc_code = #{paramCondition.tcCode}
+		</if>
+		<if test="paramCondition.publicStatus != null">
+			and public_status = #{paramCondition.publicStatus}
+		</if>
+    </select>
+
+    <select id="customMapList" resultType="map" parameterType="cn.tech.wings.cloud.res.api.model.params.AlbumParam">
+        select
+        <include refid="Base_Column_List"/>
+        from res_album wheredelete_status = 0
+		<if test="paramCondition.tcCode != null and paramCondition.tcCode != ''">
+			and tc_code = #{paramCondition.tcCode}
+		</if>
+		<if test="paramCondition.publicStatus != null">
+			and public_status = #{paramCondition.publicStatus}
+		</if>
+    </select>
+
+    <select id="customPageList" resultType="cn.tech.wings.cloud.res.api.model.result.AlbumResult" parameterType="cn.tech.wings.cloud.res.api.model.params.AlbumParam">
+        select
+        <include refid="Base_Column_List"/>
+        from res_album where delete_status = 0
+		<if test="paramCondition.tcCode != null and paramCondition.tcCode != ''">
+			and tc_code = #{paramCondition.tcCode}
+		</if>
+		<if test="paramCondition.publicStatus != null">
+			and public_status = #{paramCondition.publicStatus}
+		</if>
+    </select>
+
+    <select id="customPageMapList" resultType="map" parameterType="cn.tech.wings.cloud.res.api.model.params.AlbumParam">
+        select
+        <include refid="Base_Column_List"/>
+        from res_album where delete_status = 0
+		<if test="paramCondition.tcCode != null and paramCondition.tcCode != ''">
+			and tc_code = #{paramCondition.tcCode}
+		</if>
+		<if test="paramCondition.publicStatus != null">
+			and public_status = #{paramCondition.publicStatus}
+		</if>
+    </select>
+
+    <select id="findListBySpec" resultType="cn.tech.wings.cloud.res.api.model.result.AlbumResult" parameterType="cn.tech.wings.cloud.res.api.model.params.AlbumParam">
+        select
+        <include refid="Base_Column_List"/>
+        from res_album where delete_status = 0
+        <if test="ownerId != null">
+            and owner_id = #{ownerId}
+        </if>
+        <if test="parentid != null">
+            and parentid = #{parentid}
+        </if>
+        <if test="albumCode != null and albumCode != ''">
+            and album_code = #{albumCode}
+        </if>
+        <if test="resType != null and resType != ''">
+            and res_type = #{resType}
+        </if>
+		<if test="tcCode != null and tcCode != ''">
+			and (tc_code = #{tcCode} or parentid is null)
+		</if>
+		<if test="publicStatus != null">
+			and public_status = #{publicStatus}
+		</if>
+        order by add_time asc
+    </select>
+
+
+    <select id="findListForPassService" resultType="cn.tech.wings.cloud.res.api.model.result.AlbumResult" parameterType="cn.tech.wings.cloud.res.api.model.params.AlbumParam">
+        select
+        <include refid="Base_Column_List"/>
+        from res_album where delete_status = 0
+        <if test="ownerId != null">
+            and owner_id = #{ownerId}
+        </if>
+        and parentid is Null
+        <if test="albumCode != null and albumCode != ''">
+            and album_code = #{albumCode}
+        </if>
+        <if test="resType != null and resType != ''">
+            and res_type = #{resType}
+        </if>
+		<if test="tcCode != null and tcCode != ''">
+			and tc_code = #{tcCode}
+		</if>
+		<if test="publicStatus != null">
+			and public_status = #{publicStatus}
+		</if>
+        order by add_time asc
+    </select>
+
+    <select id="selectRootAlbumByOwnerIdResType" resultType="cn.tech.wings.cloud.res.api.model.result.AlbumResult" parameterType="map">
+        select
+        <include refid="Base_Column_List"/>
+        from res_album where delete_status = 0
+            and parentid is null
+            and owner_id = #{ownerId}
+            and res_type = #{resType}
+		<if test="paramCondition.tcCode != null and paramCondition.tcCode != ''">
+			and tc_code = #{paramCondition.tcCode}
+		</if>
+		<if test="paramCondition.publicStatus != null">
+			and public_status = #{paramCondition.publicStatus}
+		</if>
+        order by add_time asc
+    </select>
+
+    <select id="selectAlbumTree" resultType="map" parameterType="map">
+        select
+        <include refid="Base_Column_List"/>
+        from res_album where delete_status = 0 and treeid like CONCAT(#{treeId},'%')
+        order by add_time asc
+    </select>
+
+</mapper>

@@ -1,0 +1,5 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  cn.tech.wings.cloud.common.core.config.JacksonConfiguration,\
+  cn.tech.wings.cloud.common.core.config.MessageSourceConfiguration,\
+  cn.tech.wings.cloud.common.core.config.RestTemplateConfiguration,\
+  cn.tech.wings.cloud.common.core.util.SpringContextHolder

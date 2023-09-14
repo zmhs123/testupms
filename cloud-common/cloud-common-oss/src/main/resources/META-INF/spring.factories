@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  cn.tech.wings.cloud.common.file.FileAutoConfiguration

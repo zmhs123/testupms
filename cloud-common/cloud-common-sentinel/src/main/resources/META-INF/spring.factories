@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+    cn.tech.wings.cloud.common.sentinel.SentinelAutoConfiguration,\
+    cn.tech.wings.cloud.common.sentinel.handle.GlobalBizExceptionHandler

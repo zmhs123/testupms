@@ -1,0 +1,4 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  cn.tech.wings.cloud.common.websocket.config.WebSocketAutoConfiguration,\
+  cn.tech.wings.cloud.common.websocket.config.RedisMessageDistributorConfiguration,\
+  cn.tech.wings.cloud.common.websocket.config.LocalMessageDistributorConfiguration

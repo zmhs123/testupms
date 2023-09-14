@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tech.wings.cloud.message.mapper.TemplateMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.tech.wings.cloud.message.entity.Template">
+        <id column="id" property="id" />
+        <result column="add_time" property="addTime" />
+        <result column="delete_status" property="deleteStatus" />
+        <result column="content" property="content" />
+        <result column="info" property="info" />
+        <result column="mark" property="mark" />
+        <result column="open" property="open" />
+        <result column="title" property="title" />
+        <result column="type" property="type" />
+        <result column="template_code" property="templateCode" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id AS "id", add_time AS "addTime", delete_status AS "deleteStatus", content AS "content", info AS "info", mark AS "mark", open AS "open", title AS "title", type AS "type", template_code AS "templateCode",url AS "url",app_id AS "appId"
+    </sql>
+
+
+    <select id="customPageList" resultType="cn.tech.wings.cloud.message.model.result.TemplateResult" parameterType="cn.tech.wings.cloud.message.model.params.TemplateParam">
+        select
+        <include refid="Base_Column_List"/>
+        from msg_template where 1 = 1 and delete_status = 0
+            <if test="paramCondition.id != null  ">
+                and id = #{paramCondition.id}
+            </if>
+            <if test="paramCondition.mark != null and paramCondition.mark != ''">
+                and mark  = #{paramCondition.mark}
+            </if>
+            <if test="paramCondition.type != null and paramCondition.type != '' ">
+                 and type = #{paramCondition.type}
+            </if>
+            <if test="paramCondition.templateCode != null and paramCondition.templateCode != ''">
+                 and template_code  = #{paramCondition.templateCode}
+            </if>
+            <if test="paramCondition.content != null and paramCondition.content != ''">
+                and content  LIKE CONCAT('%',#{paramCondition.content},'%')
+            </if>
+            <if test="paramCondition.title != null and paramCondition.title != ''">
+                and title  LIKE CONCAT('%',#{paramCondition.title},'%')
+            </if>
+    </select>
+
+    <select  id="getObjByMark" resultType="cn.tech.wings.cloud.message.model.result.TemplateResult">
+        select
+        <include refid="Base_Column_List"/>
+        from msg_template where open = 1
+        <if test="mark != null and mark != ''">
+            and mark  = #{mark}
+        </if>
+    </select>
+
+</mapper>

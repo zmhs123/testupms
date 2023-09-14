@@ -1,0 +1,8 @@
+apiVersion: V1
+kind: AppDeployment
+spec:
+  type: serverless
+  target:
+    appId:       #部署应用的ID。如果配置了该参数则无需配置namespaceId和appName。
+    namespaceId: cn-beijing:v2  #应用所属命名空间ID。如果您不清楚应用ID，可使用应用所属命名空间及应用名称进行部署。
+    appName: cloud-res      #应用名称。如果您不清楚应用ID，可使用应用名称及命名空间进行部署。

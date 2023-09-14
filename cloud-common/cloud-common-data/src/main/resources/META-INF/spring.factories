@@ -1,0 +1,10 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+    cn.tech.wings.cloud.common.data.cache.RedisTemplateConfiguration,\
+    cn.tech.wings.cloud.common.data.cache.RedisMessageConfiguration,\
+    cn.tech.wings.cloud.common.data.cache.RedisCacheManagerConfiguration,\
+    cn.tech.wings.cloud.common.data.cache.RedisCacheAutoConfiguration,\
+    cn.tech.wings.cloud.common.data.tenant.CloudTenantConfigProperties,\
+    cn.tech.wings.cloud.common.data.tenant.TenantContextHolderFilter,\
+    cn.tech.wings.cloud.common.data.tenant.CloudTenantConfiguration,\
+    cn.tech.wings.cloud.common.data.mybatis.MybatisPlusConfiguration,\
+    cn.tech.wings.cloud.common.data.resolver.TenantKeyStrResolver

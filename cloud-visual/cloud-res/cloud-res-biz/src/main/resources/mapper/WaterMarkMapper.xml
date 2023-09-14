@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tech.wings.cloud.res.mapper.WaterMarkMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.tech.wings.cloud.res.api.entity.WaterMark">
+        <id column="id" property="id" />
+        <result column="add_time" property="addTime" />
+        <result column="delete_status" property="deleteStatus" />
+        <result column="wm_image_alpha" property="wmImageAlpha" />
+        <result column="wm_image_open" property="wmImageOpen" />
+        <result column="wm_image_pos" property="wmImagePos" />
+        <result column="wm_text" property="wmText" />
+        <result column="wm_text_color" property="wmTextColor" />
+        <result column="wm_text_font" property="wmTextFont" />
+        <result column="wm_text_font_size" property="wmTextFontSize" />
+        <result column="wm_text_open" property="wmTextOpen" />
+        <result column="wm_text_pos" property="wmTextPos" />
+        <result column="wm_image_id" property="wmImageId" />
+        <result column="is_admin" property="isAdmin" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id AS "id", add_time AS "addTime", delete_status AS "deleteStatus", wm_image_alpha AS "wmImageAlpha",
+        wm_image_open AS "wmImageOpen", wm_image_pos AS "wmImagePos", wm_text AS "wmText",
+         wm_text_color AS "wmTextColor", wm_text_font AS "wmTextFont", wm_text_font_size AS "wmTextFontSize",
+         wm_text_open AS "wmTextOpen", wm_text_pos AS "wmTextPos",
+          wm_image_id AS "wmImageId",is_admin AS "isAdmin"
+    </sql>
+
+
+    <select id="customList" resultType="cn.tech.wings.cloud.res.api.model.result.WaterMarkResult" parameterType="cn.tech.wings.cloud.res.api.model.params.WaterMarkParam">
+        select
+        <include refid="Base_Column_List"/>
+        from res_water_mark where 1 = 1
+    </select>
+
+    <select id="customMapList" resultType="map" parameterType="cn.tech.wings.cloud.res.api.model.params.WaterMarkParam">
+        select
+        <include refid="Base_Column_List"/>
+        from res_water_mark where 1 = 1
+    </select>
+
+    <select id="customPageList" resultType="cn.tech.wings.cloud.res.api.model.result.WaterMarkResult" parameterType="cn.tech.wings.cloud.res.api.model.params.WaterMarkParam">
+        select
+        <include refid="Base_Column_List"/>
+        from res_water_mark where 1 = 1
+    </select>
+
+    <select id="customPageMapList" resultType="map" parameterType="cn.tech.wings.cloud.res.api.model.params.WaterMarkParam">
+        select
+        <include refid="Base_Column_List"/>
+        from res_water_mark where 1 = 1
+    </select>
+
+    <select id="getMgrWaterMark" parameterType="map" resultMap="BaseResultMap">
+       select *
+       from res_water_mark
+       where is_admin = 1
+    </select>
+
+</mapper>
