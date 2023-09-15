@@ -102,6 +102,7 @@ public class SysCaseController {
 //				.eq(sysCase.getProjectId() != null ,SysCase::getProjectId,sysCase.getProjectId())
 				.orderByDesc(SysCase::getCreateTime);
 		List<SysCase> sysCaseList = sysCaseService.list(objectLambdaQueryWrapper);
+		log.info("新增用例表");
 		if (CollectionUtil.isNotEmpty(sysCaseList)) {
 			return R.failed("用例编码已经存在");
 		}
