@@ -67,6 +67,7 @@ public class SysCaseController {
 				.eq(sysCase.getProjectId() != null, SysCase::getProjectId, sysCase.getProjectId())
 				.eq(sysCase.getStatus() != null, SysCase::getStatus, sysCase.getStatus())
 				.orderByDesc(SysCase::getCreateTime);
+		log.info("分页查询");
 		return R.ok(sysCaseService.page(page, objectLambdaQueryWrapper));
 	}
 
