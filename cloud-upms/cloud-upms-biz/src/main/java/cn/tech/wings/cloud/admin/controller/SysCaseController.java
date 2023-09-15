@@ -134,6 +134,7 @@ public class SysCaseController {
 	@DeleteMapping("/{id}")
 	@PreAuthorize("@pms.hasPermission('sys_case_del')")
 	public R removeById(@PathVariable Long id) {
+		log.info("通过id删除用例表");
 		SysCase sysCase = sysCaseService.getById(id);
 		sysCaseService.removeById(id);
 		Map<String, Object> map = new HashMap<>();
